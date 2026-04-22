@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cls VPN - ADMIN PANEL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* НОВЫЕ ЦВЕТА (Неоновый синий) */
+        body { background-color: #050508; color: #ffffff; font-family: system-ui, -apple-system, sans-serif; }
+        .sidebar { background-color: #030305; border-right: 1px solid #101420; }
+        .card-bg { background-color: #0a0b10; border: 1px solid #101420; }
+        
+        /* Главный синий акцент */
+        .text-accent { color: #0055ff; }
+        .bg-accent { background-color: #0055ff; }
+        .border-accent { border-color: #0055ff; }
+        .bg-accent-light { background-color: rgba(0, 85, 255, 0.1); border-color: rgba(0, 85, 255, 0.3); }
+
+        /* Навигация */
+        .nav-item { color: #8b8b9b; transition: all 0.2s; }
+        .nav-item:hover { color: #ffffff; background-color: #0a0b10; }
+        .nav-item.active { color: #0055ff; background-color: rgba(0, 85, 255, 0.1); border: 1px solid rgba(0, 85, 255, 0.3); }
+
+        /* Таблицы */
+        th { border-bottom: 1px solid #101420; text-align: left; padding: 16px; color: #8b8b9b; font-weight: normal; }
+        td { border-bottom: 1px solid #101420; padding: 16px; }
+        tr:hover { background-color: #0d0e15; }
+
+        /* Переключатель (Тумблер) для способов оплаты */
+        .toggle-checkbox:checked { right: 0; border-color: #0055ff; }
+        .toggle-checkbox:checked + .toggle-label { background-color: #0055ff; }
+        .toggle-checkbox { right: 0; z-index: 1; border-color: #e2e8f0; transition: all 0.3s; }
+        .toggle-label { width: 3rem; height: 1.5rem; background-color: #1f2937; border-radius: 9999px; position: relative; cursor: pointer; transition: all 0.3s; }
+        .toggle-label::after { content: ''; position: absolute; top: 2px; left: 2px; width: 1.25rem; height: 1.25rem; background-color: white; border-radius: 50%; transition: all 0.3s; }
+        .toggle-checkbox:checked + .toggle-label::after { transform: translateX(1.5rem); }
+
+        /* Скрытие неактивных страниц */
+        .page-content { display: none; }
+        .page-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+
+    <!-- БОКОВОЕ МЕНЮ АДМИНКИ -->
+    <aside class="sidebar w-64 h-full flex flex-col flex-shrink-0">
+        <div class="p-6 flex items-center gap-3">
+            <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center border border-gray-800 shadow-[0_0_10px_rgba(0,85,255,0.4)]">
+                <span class="text-white font-bold text-xs">A</span>
+            </div>
+            <!-- Буквы cls белые, VPN - синие -->
+            <span class="font-bold text-xl tracking-wide text-white">cls <span class="text-accent">VPN</span></span>
+        </div>
+
+        <nav class="flex-1 px-4 space-y-2 mt-4">
+            <button onclick="switchAdminPage('users')" id="nav-users" class="nav-item active w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-medium">
+                Пользователи
+            </button>
+            <button onclick="switchAdminPage('tariffs')" id="nav-tariffs" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-medium border border-transparent">
+                Тарифы и Оплата
+            </button>
+            <button class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-medium border border-transparent">
+                Статистика
+            </button>
+        </nav>
+    </aside>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <main class="flex-1 overflow-y-auto p-10 relative">
+
+        <!-- ================= СТРАНИЦА: ПОЛЬЗОВАТЕЛИ (Каркас) ================= -->
+        <div id="page-users" class="page-content active max-w-6xl">
+            <div class="flex justify-between items-center mb-8">
+                <h1 class="text-3xl font-bold">Управление пользователями</h1>
+                <div class="flex gap-2">
+                    <input type="text" placeholder="Поиск по ID или @username" class="bg-[#0a0b10] border border-[#101420] rounded-lg px-4 py-2 outline-none focus:border-[#0055ff] text-sm transition">
+                    <button class="bg-[#101420] hover:bg-[#0055ff] px-4 py-2 rounded-lg text-sm transition">Найти</button>
+                </div>
+            </div>
+
+            <div class="card-bg rounded-2xl overflow-hidden">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr>
+                            <th>ID (Telegram)</th>
+                            <th>Пользователь</th>
+                            <th>Статус подписки</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-gray-400">102938475</td>
+                            <td class="font-medium">@alex_crypto</td>
+                            <td><span class="bg-green-900/30 text-green-500 px-3 py-1 rounded-full text-xs border border-green-900">Активна (14 дней)</span></td>
+                            <td><button class="text-sm bg-[#101420] hover:bg-[#0055ff] px-4 py-2 rounded-lg transition">Управление</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ================= СТРАНИЦА: ТАРИФЫ И ОПЛАТА ================= -->
+        <div id="page-tariffs" class="page-content max-w-4xl">
+            <h1 class="text-3xl font-bold mb-2">Тарифы и Оплата</h1>
+            <p class="text-gray-400 mb-8">Настройка цен в калькуляторе на сайте и управление платежными шлюзами.</p>
+
+            <!-- БЛОК 1: Базовая стоимость (Срок) -->
+            <div class="card-bg p-8 rounded-2xl mb-6">
+                <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                    <span class="w-2 h-6 bg-accent rounded-full block"></span> Базовая стоимость (Срок)
+                </h2>
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="text-sm text-gray-400 mb-2 block">Цена за 30 дней (₽)</label>
+                        <input type="number" value="300" class="w-full bg-[#050508] border border-[#101420] rounded-xl px-4 py-3 outline-none focus:border-[#0055ff] transition font-bold text-lg">
+                    </div>
+                    <div>
+                        <label class="text-sm text-gray-400 mb-2 block">Цена за 90 дней (₽) <span class="text-xs text-green-500 ml-2">Скидка!</span></label>
+                        <input type="number" value="800" class="w-full bg-[#050508] border border-[#101420] rounded-xl px-4 py-3 outline-none focus:border-[#0055ff] transition font-bold text-lg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- БЛОК 2: Надбавки (Устройства и Трафик) -->
+            <div class="card-bg p-8 rounded-2xl mb-6">
+                <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                    <span class="w-2 h-6 bg-accent rounded-full block"></span> Дополнительные опции
+                </h2>
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="text-sm text-gray-400 mb-2 block">Доплата за каждые +5 устройств (₽)</label>
+                        <div class="flex items-center">
+                            <span class="bg-[#101420] px-4 py-3 rounded-l-xl border border-r-0 border-[#101420] text-gray-400">+</span>
+                            <input type="number" value="20" class="w-full bg-[#050508] border border-[#101420] rounded-r-xl px-4 py-3 outline-none focus:border-[#0055ff] transition font-bold">
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">Базово включено 5 устройств. Если юзер выберет 10, к цене добавится эта сумма.</p>
+                    </div>
+                    <div>
+                        <label class="text-sm text-gray-400 mb-2 block">Доплата за каждые +50 ГБ трафика (₽)</label>
+                        <div class="flex items-center">
+                            <span class="bg-[#101420] px-4 py-3 rounded-l-xl border border-r-0 border-[#101420] text-gray-400">+</span>
+                            <input type="number" value="75" class="w-full bg-[#050508] border border-[#101420] rounded-r-xl px-4 py-3 outline-none focus:border-[#0055ff] transition font-bold">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- БЛОК 3: Способы оплаты (Тумблеры) -->
+            <div class="card-bg p-8 rounded-2xl mb-8">
+                <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                    <span class="w-2 h-6 bg-accent rounded-full block"></span> Активные способы оплаты
+                </h2>
+                
+                <div class="space-y-4">
+                    <!-- Тумблер 1: Карта -->
+                    <div class="flex items-center justify-between bg-[#050508] border border-[#101420] p-4 rounded-xl">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-[#101420] rounded-lg flex items-center justify-center">💳</div>
+                            <div>
+                                <div class="font-medium text-white">Банковская карта (ЮKassa / Lava)</div>
+                                <div class="text-xs text-gray-400 mt-1">Оплата картами РФ и СБП</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="toggle-card" class="hidden toggle-checkbox" checked>
+                            <label for="toggle-card" class="toggle-label block"></label>
+                        </div>
+                    </div>
+
+                    <!-- Тумблер 2: Крипта -->
+                    <div class="flex items-center justify-between bg-[#050508] border border-[#101420] p-4 rounded-xl">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-[#101420] rounded-lg flex items-center justify-center">₿</div>
+                            <div>
+                                <div class="font-medium text-white">Криптовалюта (CryptoBot)</div>
+                                <div class="text-xs text-gray-400 mt-1">USDT, TON, BTC</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="toggle-crypto" class="hidden toggle-checkbox" checked>
+                            <label for="toggle-crypto" class="toggle-label block"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- КНОПКА СОХРАНЕНИЯ -->
+            <div class="flex justify-end">
+                <button onclick="alert('Настройки тарифов сохранены! (Имитация)')" class="bg-accent text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-600 shadow-[0_0_20px_rgba(0,85,255,0.3)] transition transform hover:scale-105">
+                    Сохранить изменения
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Функция переключения страниц в админке
+        function switchAdminPage(pageId) {
+            // Убираем активность со всех кнопок меню
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active', 'bg-accent-light', 'border-accent'));
+            // Скрываем все страницы
+            document.querySelectorAll('.page-content').forEach(el => el.classList.remove('active'));
+
+            // Активируем нужную кнопку
+            const activeNav = document.getElementById('nav-' + pageId);
+            if(activeNav) {
+                activeNav.classList.add('active');
+            }
+            // Показываем нужную страницу
+            document.getElementById('page-' + pageId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
