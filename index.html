@@ -4,23 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cls VPN - Личный кабинет</title>
-    <!-- Используем Tailwind CSS для стилей -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Точные цвета с твоих скриншотов */
-        body { background-color: #0b0b0e; color: #ffffff; font-family: system-ui, -apple-system, sans-serif; }
-        .sidebar { background-color: #070709; border-right: 1px solid #1a1a24; }
-        .card-bg { background-color: #111116; border: 1px solid #1a1a24; }
+        /* НОВЫЕ ЦВЕТА (Темно-синий и неоновый) */
+        body { background-color: #050508; color: #ffffff; font-family: system-ui, -apple-system, sans-serif; }
+        .sidebar { background-color: #030305; border-right: 1px solid #101420; }
+        .card-bg { background-color: #0a0b10; border: 1px solid #101420; }
         
-        .text-accent { color: #ff3b3b; }
-        .bg-accent-light { background-color: rgba(255, 59, 59, 0.08); border-color: rgba(255, 59, 59, 0.2); }
+        .text-accent { color: #0055ff; }
+        .bg-accent-light { background-color: rgba(0, 85, 255, 0.08); border-color: rgba(0, 85, 255, 0.2); }
         
         .nav-item { color: #8b8b9b; transition: all 0.2s; }
-        .nav-item:hover { color: #ffffff; background-color: #111116; }
-        .nav-item.active { color: #ff3b3b; background-color: rgba(255, 59, 59, 0.08); border: 1px solid rgba(255, 59, 59, 0.2); }
+        .nav-item:hover { color: #ffffff; background-color: #0a0b10; }
+        .nav-item.active { color: #0055ff; background-color: rgba(0, 85, 255, 0.08); border: 1px solid rgba(0, 85, 255, 0.3); }
         
-        .btn-tariff { background-color: #0b0b0e; border: 1px solid #1a1a24; color: #ffffff; transition: all 0.2s; }
-        .btn-tariff.active { background-color: rgba(255, 59, 59, 0.08); border: 1px solid #ff3b3b; color: #ffffff; }
+        .btn-tariff { background-color: #050508; border: 1px solid #101420; color: #ffffff; transition: all 0.2s; }
+        .btn-tariff.active { background-color: rgba(0, 85, 255, 0.08); border: 1px solid #0055ff; color: #ffffff; }
         
         /* Скрытие неактивных страниц */
         .page-content { display: none; }
@@ -33,11 +32,12 @@
     <!-- БОКОВОЕ МЕНЮ (SIDEBAR) -->
     <aside class="sidebar w-64 h-full flex flex-col flex-shrink-0">
         <!-- Логотип -->
-        <div class="p-6 flex items-center gap-3">
-            <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center border border-gray-700">
+        <div class="p-6 flex items-center gap-3 border-b border-[#101420] pb-6 mb-2">
+            <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center border border-gray-800 shadow-[0_0_10px_rgba(0,85,255,0.3)]">
                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
             </div>
-            <span class="font-bold text-xl tracking-wide">cls <span class="text-accent">VPN</span></span>
+            <!-- Буквы cls белые, VPN - синие -->
+            <span class="font-bold text-xl tracking-wide text-white">cls <span class="text-accent">VPN</span></span>
         </div>
 
         <!-- Навигация -->
@@ -83,7 +83,7 @@
             </button>
         </nav>
         
-        <div class="p-4">
+        <div class="p-4 border-t border-[#101420]">
             <button class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-medium border border-transparent">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                 Выйти
@@ -100,11 +100,12 @@
                 <h1 class="text-3xl font-bold mb-8">Личный кабинет</h1>
 
                 <div class="card-bg rounded-2xl p-6 mb-6 flex items-center gap-3">
-                    <div class="w-3 h-3 bg-red-500 rounded-full shadow-[0_0_12px_rgba(239,68,68,0.8)]"></div>
+                    <!-- Заменили красный кружок на синий -->
+                    <div class="w-3 h-3 bg-[#0055ff] rounded-full shadow-[0_0_12px_rgba(0,85,255,0.8)]"></div>
                     <span class="text-lg font-semibold">Нет подписки</span>
                 </div>
 
-                <button onclick="switchPage('payment')" class="bg-accent-light text-accent px-6 py-3 rounded-xl hover:bg-red-900/30 transition flex items-center gap-2 font-medium">
+                <button onclick="switchPage('payment')" class="bg-accent-light text-accent px-6 py-3 rounded-xl border border-[rgba(0,85,255,0.3)] hover:bg-[#0055ff] hover:text-white transition-all flex items-center gap-2 font-medium">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
                     Купить подписку
                 </button>
@@ -160,7 +161,7 @@
                 <div>
                     <h3 class="text-xl font-semibold mb-4">Перейти к оплате</h3>
                     <div class="flex gap-4">
-                        <button class="bg-accent-light border border-[#3b0d10] hover:border-red-500/50 transition flex-1 p-5 rounded-2xl flex justify-between items-center group">
+                        <button class="bg-accent-light border border-[rgba(0,85,255,0.2)] hover:border-[#0055ff] transition-colors flex-1 p-5 rounded-2xl flex justify-between items-center group">
                             <div class="flex items-center gap-3">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
                                 <span class="font-medium text-white">Банковская карта РФ</span>
@@ -171,7 +172,7 @@
                             </div>
                         </button>
 
-                        <button class="bg-accent-light border border-[#3b0d10] hover:border-red-500/50 transition flex-1 p-5 rounded-2xl flex justify-between items-center group">
+                        <button class="bg-accent-light border border-[rgba(0,85,255,0.2)] hover:border-[#0055ff] transition-colors flex-1 p-5 rounded-2xl flex justify-between items-center group">
                             <div class="flex items-center gap-3">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                                 <span class="font-medium text-white">Криптовалюта</span>
@@ -218,19 +219,19 @@
                     <h3 class="text-lg font-bold mb-4">Ваши реферальные ссылки</h3>
                     
                     <div class="space-y-4">
-                        <div class="flex items-center bg-[#0b0b0e] border border-[#1a1a24] rounded-xl p-3">
+                        <div class="flex items-center bg-[#050508] border border-[#101420] rounded-xl p-3">
                             <span class="text-gray-400 w-12 text-sm">Сайт:</span>
                             <input type="text" readonly value="https://cls.app/register?ref=w_0123feca4648" class="bg-transparent flex-1 outline-none text-sm text-gray-300 ml-2">
-                            <button class="p-2 hover:bg-[#1a1a24] rounded-lg transition">
-                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            <button class="p-2 hover:bg-[#101420] rounded-lg transition text-accent">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                             </button>
                         </div>
                         
-                        <div class="flex items-center bg-[#0b0b0e] border border-[#1a1a24] rounded-xl p-3">
+                        <div class="flex items-center bg-[#050508] border border-[#101420] rounded-xl p-3">
                             <span class="text-gray-400 w-12 text-sm">Бот:</span>
                             <input type="text" readonly value="https://t.me/clsVPN_BOT?start=w_0123feca4648" class="bg-transparent flex-1 outline-none text-sm text-gray-300 ml-2">
-                            <button class="p-2 hover:bg-[#1a1a24] rounded-lg transition">
-                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            <button class="p-2 hover:bg-[#101420] rounded-lg transition text-accent">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                             </button>
                         </div>
                     </div>
@@ -240,15 +241,12 @@
         </div>
     </main>
 
-    <!-- СКРИПТЫ ДЛЯ ЛОГИКИ САЙТА -->
     <script>
         // --- Логика переключения страниц в меню ---
         function switchPage(pageId) {
-            // 1. Убираем класс active со всех ссылок меню и контента
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active', 'bg-accent-light', 'border-[rgba(255,59,59,0.2)]'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active', 'bg-accent-light', 'border-[rgba(0,85,255,0.3)]'));
             document.querySelectorAll('.page-content').forEach(el => el.classList.remove('active'));
 
-            // 2. Добавляем класс active к нажатой ссылке и нужной странице
             const activeNav = document.getElementById('nav-' + pageId);
             if(activeNav) {
                 activeNav.classList.add('active');
@@ -260,34 +258,25 @@
         let currentOrder = { days: 30, devices: 5, traffic: 50 };
 
         function selectOption(type, value, buttonElement) {
-            // Обновляем данные
             currentOrder[type] = value;
-
-            // Обновляем активные кнопки (визуально)
             const parent = buttonElement.parentElement;
             parent.querySelectorAll('.btn-tariff').forEach(btn => btn.classList.remove('active'));
             buttonElement.classList.add('active');
-
             updatePrice();
         }
 
         function updatePrice() {
-            // Формула расчета цены (примерная логика для визуала)
             let basePrice = 0;
             if (currentOrder.days === 30) basePrice = 300;
             if (currentOrder.days === 90) basePrice = 800;
-
-            // Добавочная стоимость за устройства
-            basePrice += (currentOrder.devices - 5) * 20; 
             
-            // Добавочная стоимость за трафик
+            basePrice += (currentOrder.devices - 5) * 20; 
             basePrice += (currentOrder.traffic - 50) * 1.5;
 
-            // Обновление текста на странице
             document.getElementById('summary-text').innerText = `${currentOrder.days} дней · ${currentOrder.devices} устр. · ${currentOrder.traffic} ГБ`;
             document.getElementById('total-price').innerText = basePrice;
             document.getElementById('price-card').innerText = basePrice;
-            document.getElementById('price-crypto').innerText = (basePrice / 100).toFixed(1); // Примерный курс
+            document.getElementById('price-crypto').innerText = (basePrice / 100).toFixed(1);
         }
     </script>
 </body>
