@@ -26,12 +26,11 @@
         td { border-bottom: 1px solid #101420; padding: 16px; }
         tr:hover { background-color: #0d0e15; }
 
-        /* Тумблер */
-        .toggle-checkbox:checked { right: 0; border-color: #0055ff; }
-        .toggle-checkbox:checked + .toggle-label { background-color: #0055ff; }
-        .toggle-checkbox { right: 0; z-index: 1; border-color: #e2e8f0; transition: all 0.3s; }
-        .toggle-label { width: 3rem; height: 1.5rem; background-color: #1f2937; border-radius: 9999px; position: relative; cursor: pointer; transition: all 0.3s; }
-        .toggle-label::after { content: ''; position: absolute; top: 2px; left: 2px; width: 1.25rem; height: 1.25rem; background-color: white; border-radius: 50%; transition: all 0.3s; }
+        /* Кастомный Тумблер (Свитчер) */
+        .toggle-checkbox { display: none; }
+        .toggle-label { width: 3rem; height: 1.5rem; background-color: #1f2937; border-radius: 9999px; position: relative; cursor: pointer; transition: all 0.3s; display: block; border: 1px solid #374151;}
+        .toggle-label::after { content: ''; position: absolute; top: 2px; left: 3px; width: 1.15rem; height: 1.15rem; background-color: white; border-radius: 50%; transition: all 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .toggle-checkbox:checked + .toggle-label { background-color: #0055ff; border-color: #0055ff; }
         .toggle-checkbox:checked + .toggle-label::after { transform: translateX(1.5rem); }
 
         /* Скрытие страниц */
@@ -78,43 +77,50 @@
         <div id="page-stats" class="page-content active max-w-6xl">
             <h1 class="text-3xl font-bold mb-8">Обзор (Дашборд)</h1>
 
-            <!-- Карточки с главными цифрами -->
+            <!-- Исправленные карточки с цифрами -->
             <div class="grid grid-cols-4 gap-6 mb-8">
                 <div class="card-bg p-6 rounded-2xl relative overflow-hidden">
                     <div class="text-gray-400 text-sm mb-1">Доход (За месяц)</div>
                     <div class="text-3xl font-bold text-white">45,200 ₽</div>
-                    <div class="text-xs text-green-500 mt-2">+12% с прошлой недели</div>
+                    <div class="text-xs text-green-500 mt-2 flex items-center gap-1">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                        +12% с прошлой недели
+                    </div>
                     <svg class="absolute -bottom-4 -right-4 w-24 h-24 text-accent opacity-10" fill="currentColor" viewBox="0 0 20 20"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
                 </div>
                 <div class="card-bg p-6 rounded-2xl">
                     <div class="text-gray-400 text-sm mb-1">Активные подписки</div>
                     <div class="text-3xl font-bold text-white">128</div>
-                    <div class="text-xs text-green-500 mt-2">+5 за сегодня</div>
+                    <div class="text-xs text-green-500 mt-2 flex items-center gap-1">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                        +5 за сегодня
+                    </div>
                 </div>
                 <div class="card-bg p-6 rounded-2xl">
-                    <div class="text-gray-400 text-sm mb-1">Всего регистраций</div>
+                    <div class="text-gray-400 text-sm mb-1">Всего пользователей</div>
                     <div class="text-3xl font-bold text-white">450</div>
+                    <div class="text-xs text-gray-500 mt-2 flex items-center gap-1">В боте Telegram</div>
                 </div>
                 <div class="card-bg p-6 rounded-2xl">
-                    <div class="text-gray-400 text-sm mb-1">Активные серверы</div>
-                    <div class="text-3xl font-bold text-accent">3 / 3</div>
-                    <div class="text-xs text-gray-400 mt-2">Загрузка в норме</div>
+                    <div class="text-gray-400 text-sm mb-1">Расход трафика</div>
+                    <div class="text-3xl font-bold text-accent">1.2 TB</div>
+                    <div class="text-xs text-gray-400 mt-2">За текущий месяц</div>
                 </div>
             </div>
 
             <!-- Имитация графика дохода -->
             <div class="card-bg p-8 rounded-2xl mb-8">
                 <h3 class="text-lg font-bold mb-6">График продаж (последние 7 дней)</h3>
-                <div class="flex items-end justify-between h-48 gap-2">
-                    <div class="w-full bg-[#101420] rounded-t-md relative group"><div class="absolute bottom-full mb-2 hidden group-hover:block bg-white text-black text-xs px-2 py-1 rounded">1200 ₽</div><div class="bg-accent w-full absolute bottom-0 rounded-t-md hover:bg-blue-400 transition-all" style="height: 30%;"></div></div>
-                    <div class="w-full bg-[#101420] rounded-t-md relative group"><div class="absolute bottom-full mb-2 hidden group-hover:block bg-white text-black text-xs px-2 py-1 rounded">2500 ₽</div><div class="bg-accent w-full absolute bottom-0 rounded-t-md hover:bg-blue-400 transition-all" style="height: 60%;"></div></div>
-                    <div class="w-full bg-[#101420] rounded-t-md relative group"><div class="absolute bottom-full mb-2 hidden group-hover:block bg-white text-black text-xs px-2 py-1 rounded">1800 ₽</div><div class="bg-accent w-full absolute bottom-0 rounded-t-md hover:bg-blue-400 transition-all" style="height: 45%;"></div></div>
-                    <div class="w-full bg-[#101420] rounded-t-md relative group"><div class="absolute bottom-full mb-2 hidden group-hover:block bg-white text-black text-xs px-2 py-1 rounded">900 ₽</div><div class="bg-accent w-full absolute bottom-0 rounded-t-md hover:bg-blue-400 transition-all" style="height: 20%;"></div></div>
-                    <div class="w-full bg-[#101420] rounded-t-md relative group"><div class="absolute bottom-full mb-2 hidden group-hover:block bg-white text-black text-xs px-2 py-1 rounded">3500 ₽</div><div class="bg-accent w-full absolute bottom-0 rounded-t-md hover:bg-blue-400 transition-all" style="height: 85%;"></div></div>
-                    <div class="w-full bg-[#101420] rounded-t-md relative group"><div class="absolute bottom-full mb-2 hidden group-hover:block bg-white text-black text-xs px-2 py-1 rounded">4200 ₽</div><div class="bg-accent w-full absolute bottom-0 rounded-t-md hover:bg-blue-400 transition-all" style="height: 100%;"></div></div>
-                    <div class="w-full bg-[#101420] rounded-t-md relative group"><div class="absolute bottom-full mb-2 hidden group-hover:block bg-white text-black text-xs px-2 py-1 rounded">2800 ₽</div><div class="bg-accent w-full absolute bottom-0 rounded-t-md hover:bg-blue-400 transition-all" style="height: 65%;"></div></div>
+                <div class="flex items-end justify-between h-48 gap-3">
+                    <div class="w-full bg-[#101420] rounded-t-lg relative group"><div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 hidden group-hover:block bg-[#1f2937] border border-gray-700 text-white text-xs px-2 py-1 rounded shadow-lg z-10">1200 ₽</div><div class="bg-accent w-full absolute bottom-0 rounded-t-lg hover:bg-blue-400 transition-all cursor-pointer" style="height: 30%;"></div></div>
+                    <div class="w-full bg-[#101420] rounded-t-lg relative group"><div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 hidden group-hover:block bg-[#1f2937] border border-gray-700 text-white text-xs px-2 py-1 rounded shadow-lg z-10">2500 ₽</div><div class="bg-accent w-full absolute bottom-0 rounded-t-lg hover:bg-blue-400 transition-all cursor-pointer" style="height: 60%;"></div></div>
+                    <div class="w-full bg-[#101420] rounded-t-lg relative group"><div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 hidden group-hover:block bg-[#1f2937] border border-gray-700 text-white text-xs px-2 py-1 rounded shadow-lg z-10">1800 ₽</div><div class="bg-accent w-full absolute bottom-0 rounded-t-lg hover:bg-blue-400 transition-all cursor-pointer" style="height: 45%;"></div></div>
+                    <div class="w-full bg-[#101420] rounded-t-lg relative group"><div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 hidden group-hover:block bg-[#1f2937] border border-gray-700 text-white text-xs px-2 py-1 rounded shadow-lg z-10">900 ₽</div><div class="bg-accent w-full absolute bottom-0 rounded-t-lg hover:bg-blue-400 transition-all cursor-pointer" style="height: 20%;"></div></div>
+                    <div class="w-full bg-[#101420] rounded-t-lg relative group"><div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 hidden group-hover:block bg-[#1f2937] border border-gray-700 text-white text-xs px-2 py-1 rounded shadow-lg z-10">3500 ₽</div><div class="bg-accent w-full absolute bottom-0 rounded-t-lg hover:bg-blue-400 transition-all cursor-pointer" style="height: 85%;"></div></div>
+                    <div class="w-full bg-[#101420] rounded-t-lg relative group"><div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 hidden group-hover:block bg-[#1f2937] border border-gray-700 text-white text-xs px-2 py-1 rounded shadow-lg z-10">4200 ₽</div><div class="bg-accent w-full absolute bottom-0 rounded-t-lg hover:bg-blue-400 transition-all cursor-pointer" style="height: 100%;"></div></div>
+                    <div class="w-full bg-[#101420] rounded-t-lg relative group"><div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 hidden group-hover:block bg-[#1f2937] border border-gray-700 text-white text-xs px-2 py-1 rounded shadow-lg z-10">2800 ₽</div><div class="bg-accent w-full absolute bottom-0 rounded-t-lg hover:bg-blue-400 transition-all cursor-pointer" style="height: 65%;"></div></div>
                 </div>
-                <div class="flex justify-between text-xs text-gray-500 mt-3 px-2">
+                <div class="flex justify-between text-xs text-gray-500 mt-3 px-4">
                     <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
                 </div>
             </div>
@@ -131,21 +137,33 @@
             </div>
 
             <!-- Список серверов -->
-            <div class="grid grid-cols-2 gap-6">
+            <div class="grid grid-cols-2 gap-6" id="servers-list">
                 <!-- Сервер 1 -->
-                <div class="card-bg p-6 rounded-2xl border border-[rgba(0,85,255,0.3)] relative overflow-hidden">
+                <div class="server-card card-bg p-6 rounded-2xl border border-[rgba(0,85,255,0.3)] relative overflow-hidden transition-all">
                     <div class="flex justify-between items-start mb-4">
                         <div>
                             <div class="flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.8)]"></span>
+                                <span class="server-status-dot w-2.5 h-2.5 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.8)] transition-colors"></span>
                                 <h3 class="text-xl font-bold">Нидерланды (NL-1)</h3>
                             </div>
                             <div class="text-sm text-gray-400 mt-1">IP: 185.12.34.56</div>
                         </div>
-                        <span class="bg-[#101420] text-gray-300 px-3 py-1 rounded-lg text-xs font-mono">VLESS / XTLS</span>
+                        
+                        <!-- Элементы управления: Вкл/Выкл и Удалить -->
+                        <div class="flex items-center gap-3">
+                            <div>
+                                <input type="checkbox" id="toggle-s1" class="toggle-checkbox" checked onchange="toggleServerStatus(this)">
+                                <label for="toggle-s1" class="toggle-label"></label>
+                            </div>
+                            <button onclick="deleteServer(this)" class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition" title="Удалить сервер">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </div>
                     </div>
                     
-                    <div class="space-y-4 mt-6">
+                    <span class="inline-block bg-[#101420] text-gray-300 px-3 py-1 rounded-lg text-xs font-mono mb-2">VLESS / XTLS</span>
+                    
+                    <div class="space-y-4 mt-4">
                         <div>
                             <div class="flex justify-between text-xs mb-1 text-gray-400"><span>CPU Load</span><span>35%</span></div>
                             <div class="w-full bg-[#050508] rounded-full h-1.5"><div class="bg-green-500 h-1.5 rounded-full" style="width: 35%"></div></div>
@@ -161,19 +179,31 @@
                 </div>
 
                 <!-- Сервер 2 -->
-                <div class="card-bg p-6 rounded-2xl relative overflow-hidden">
+                <div class="server-card card-bg p-6 rounded-2xl relative overflow-hidden transition-all">
                     <div class="flex justify-between items-start mb-4">
                         <div>
                             <div class="flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.8)]"></span>
+                                <span class="server-status-dot w-2.5 h-2.5 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.8)] transition-colors"></span>
                                 <h3 class="text-xl font-bold">Германия (DE-1)</h3>
                             </div>
                             <div class="text-sm text-gray-400 mt-1">IP: 142.99.11.22</div>
                         </div>
-                        <span class="bg-[#101420] text-gray-300 px-3 py-1 rounded-lg text-xs font-mono">WireGuard</span>
+                        
+                        <!-- Элементы управления: Вкл/Выкл и Удалить -->
+                        <div class="flex items-center gap-3">
+                            <div>
+                                <input type="checkbox" id="toggle-s2" class="toggle-checkbox" checked onchange="toggleServerStatus(this)">
+                                <label for="toggle-s2" class="toggle-label"></label>
+                            </div>
+                            <button onclick="deleteServer(this)" class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition" title="Удалить сервер">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </div>
                     </div>
                     
-                    <div class="space-y-4 mt-6">
+                    <span class="inline-block bg-[#101420] text-gray-300 px-3 py-1 rounded-lg text-xs font-mono mb-2">WireGuard</span>
+                    
+                    <div class="space-y-4 mt-4">
                         <div>
                             <div class="flex justify-between text-xs mb-1 text-gray-400"><span>CPU Load</span><span>85%</span></div>
                             <div class="w-full bg-[#050508] rounded-full h-1.5"><div class="bg-red-500 h-1.5 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.8)]" style="width: 85%"></div></div>
@@ -225,7 +255,6 @@
 
         <!-- ================= СТРАНИЦА: ПОЛЬЗОВАТЕЛИ ================= -->
         <div id="page-users" class="page-content max-w-6xl">
-            <!-- (Код с таблицей юзеров из предыдущего ответа) -->
             <h1 class="text-3xl font-bold mb-8">Пользователи</h1>
             <div class="card-bg rounded-2xl overflow-hidden">
                 <table class="w-full border-collapse">
@@ -238,15 +267,77 @@
         </div>
 
         <!-- ================= СТРАНИЦА: ТАРИФЫ И ОПЛАТА ================= -->
-        <div id="page-tariffs" class="page-content max-w-4xl">
-             <!-- (Код с калькулятором цен из предыдущего ответа) -->
-             <h1 class="text-3xl font-bold mb-8">Тарифы</h1>
-             <div class="card-bg p-8 rounded-2xl mb-6">
+        <div id="page-tariffs" class="page-content max-w-6xl">
+             <h1 class="text-3xl font-bold mb-8">Тарифы и Оплата</h1>
+             
+             <!-- Блок тарифов -->
+             <div class="card-bg p-8 rounded-2xl mb-8">
                 <h2 class="text-xl font-bold mb-6 flex items-center gap-2"><span class="w-2 h-6 bg-accent rounded-full block"></span> Базовая стоимость</h2>
-                <div class="grid grid-cols-2 gap-6">
+                <div class="grid grid-cols-2 gap-6 max-w-2xl">
                     <div><label class="text-sm text-gray-400 mb-2 block">30 дней (₽)</label><input type="number" value="300" class="w-full bg-[#050508] border border-[#101420] rounded-xl px-4 py-3 outline-none focus:border-[#0055ff] font-bold"></div>
                     <div><label class="text-sm text-gray-400 mb-2 block">90 дней (₽)</label><input type="number" value="800" class="w-full bg-[#050508] border border-[#101420] rounded-xl px-4 py-3 outline-none focus:border-[#0055ff] font-bold"></div>
                 </div>
+                <button class="mt-6 bg-accent text-white px-6 py-2.5 rounded-xl font-medium hover:bg-blue-600 transition">Сохранить цены</button>
+            </div>
+
+            <!-- СПОСОБЫ ОПЛАТЫ -->
+            <h2 class="text-2xl font-bold mb-6">Способы оплаты</h2>
+            <div class="grid grid-cols-2 gap-6">
+                
+                <!-- Настройки ЮKassa -->
+                <div class="card-bg p-8 rounded-2xl">
+                    <div class="flex justify-between items-center mb-6 border-b border-[#101420] pb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center font-bold text-black">ЮK</div>
+                            <h3 class="text-xl font-bold">ЮKassa</h3>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="toggle-yookassa" class="toggle-checkbox" checked>
+                            <label for="toggle-yookassa" class="toggle-label"></label>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-sm text-gray-400 mb-2 block">Shop ID</label>
+                            <input type="text" placeholder="Введите Shop ID" value="123456" class="w-full bg-[#050508] border border-[#101420] rounded-xl px-4 py-3 outline-none focus:border-[#0055ff]">
+                        </div>
+                        <div>
+                            <label class="text-sm text-gray-400 mb-2 block">Secret Key (Секретный ключ)</label>
+                            <input type="password" placeholder="test_xxxxxxxxxxxxxxxxxxxxxxxxxx" value="test_qwerty123456" class="w-full bg-[#050508] border border-[#101420] rounded-xl px-4 py-3 outline-none focus:border-[#0055ff]">
+                        </div>
+                    </div>
+                    <button class="mt-6 w-full border border-[#101420] text-white px-6 py-3 rounded-xl font-medium hover:bg-[#101420] transition">Сохранить ключи ЮKassa</button>
+                </div>
+
+                <!-- Настройки Криптовалюты (CryptoBot) -->
+                <div class="card-bg p-8 rounded-2xl">
+                    <div class="flex justify-between items-center mb-6 border-b border-[#101420] pb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center font-bold text-white">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold">CryptoBot (Telegram)</h3>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="toggle-crypto" class="toggle-checkbox">
+                            <label for="toggle-crypto" class="toggle-label"></label>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-sm text-gray-400 mb-2 block">API Token (из @CryptoBot)</label>
+                            <input type="password" placeholder="123456:ABCDEFGHIJKLMNOPQRSTUVWXYZ" class="w-full bg-[#050508] border border-[#101420] rounded-xl px-4 py-3 outline-none focus:border-[#0055ff]">
+                        </div>
+                        <div>
+                            <label class="text-sm text-gray-400 mb-2 block">Принимаемые монеты</label>
+                            <input type="text" placeholder="USDT, TON, BTC" value="USDT, TON" class="w-full bg-[#050508] border border-[#101420] rounded-xl px-4 py-3 outline-none focus:border-[#0055ff]">
+                        </div>
+                    </div>
+                    <button class="mt-6 w-full border border-[#101420] text-white px-6 py-3 rounded-xl font-medium hover:bg-[#101420] transition">Сохранить ключи Crypto</button>
+                </div>
+
             </div>
         </div>
 
@@ -275,6 +366,38 @@
             const modal = document.getElementById('add-server-modal');
             modal.classList.add('hidden');
             modal.classList.remove('flex');
+        }
+
+        // Скрипт: Удаление сервера из списка
+        function deleteServer(btnElement) {
+            if(confirm("Вы уверены, что хотите удалить этот сервер? Это действие нельзя отменить.")) {
+                const serverCard = btnElement.closest('.server-card');
+                serverCard.style.opacity = '0';
+                serverCard.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    serverCard.remove();
+                }, 300); // Ждем окончания анимации
+            }
+        }
+
+        // Скрипт: Включение/Выключение сервера
+        function toggleServerStatus(checkbox) {
+            const serverCard = checkbox.closest('.server-card');
+            const statusDot = serverCard.querySelector('.server-status-dot');
+            
+            if(checkbox.checked) {
+                // Сервер Включен
+                statusDot.classList.remove('bg-red-500', 'shadow-[0_0_8px_rgba(239,68,68,0.8)]');
+                statusDot.classList.add('bg-green-500', 'shadow-[0_0_8px_rgba(34,197,94,0.8)]');
+                serverCard.classList.add('border-[rgba(0,85,255,0.3)]');
+                serverCard.style.opacity = '1';
+            } else {
+                // Сервер Выключен
+                statusDot.classList.remove('bg-green-500', 'shadow-[0_0_8px_rgba(34,197,94,0.8)]');
+                statusDot.classList.add('bg-red-500', 'shadow-[0_0_8px_rgba(239,68,68,0.8)]');
+                serverCard.classList.remove('border-[rgba(0,85,255,0.3)]');
+                serverCard.style.opacity = '0.7'; // Делаем карточку чуть тусклее
+            }
         }
     </script>
 </body>
